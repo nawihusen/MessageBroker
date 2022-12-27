@@ -41,3 +41,23 @@ func Rabbit() (*amqp.Connection, error) {
 	fmt.Println("Success Get Connect To Rabbit")
 	return conn, nil
 }
+
+func OpenCh(con *amqp.Connection) *amqp.Channel {
+	ch, er := con.Channel()
+	if er != nil {
+		fmt.Println("Failet To Open Chanel")
+		panic(er)
+	}
+
+	return ch
+}
+
+func Declare(ch *amqp.Channel) amqp.Queue {
+	queue, er := ch.QueueDeclare("Hello", false, false, false, false, nil)
+	if er != nil {
+		fmt.Println("Failed to declare a queue")
+		panic(er)
+	}
+
+	return queue
+}

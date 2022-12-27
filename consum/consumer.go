@@ -1,5 +1,0 @@
-package consum
-
-func consum() {
-
-}
